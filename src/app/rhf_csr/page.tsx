@@ -57,9 +57,6 @@ export default function TestPage() {
         <Button type="submit" disabled={isPending}>
           Submit
         </Button>
-
-        <div>{JSON.stringify(state)}</div>
-        <div>{JSON.stringify(isPending)}</div>
       </form>
     </Form>
   )
