@@ -46,8 +46,8 @@ export default function TestPage() {
             This is a Form component using React Hook Form
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
+        <CardContent className="grid gap-4">
+          <div className="grid gap-1">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -57,6 +57,19 @@ export default function TestPage() {
             />
             {errors.name && (
               <p className="text-red-500">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div className="grid gap-1">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              {...register('email', { required: 'Email is required' })}
+              type="email"
+              placeholder="email"
+            />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
             )}
           </div>
         </CardContent>
