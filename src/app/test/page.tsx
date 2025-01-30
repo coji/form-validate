@@ -32,7 +32,7 @@ export default function TestPage() {
       }}
       className="flex flex-col gap-4"
     >
-      <fieldset className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1">
         <Label htmlFor="title">Title</Label>
         <Input
           id="title"
@@ -41,7 +41,7 @@ export default function TestPage() {
           placeholder="title"
         />
         {errors.title && <p className="text-red-500">{errors.title.message}</p>}
-      </fieldset>
+      </div>
 
       <Button type="submit" disabled={isSubmitting}>
         Submit
