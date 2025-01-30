@@ -17,17 +17,21 @@ export default function TestPage() {
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     progressive: true,
+    mode: 'onSubmit',
+    reValidateMode: 'onBlur',
   })
+
+  const handleSuccess = async ({ response }: { response: Response }) => {
+    toast.success(`success!: ${JSON.stringify(await response.json())}`)
+    reset()
+  }
 
   return (
     <Form
       control={control}
       action="/rhf_form/api"
       method="post"
-      onSuccess={async ({ response }) => {
-        toast.success(`success!: ${JSON.stringify(await response.json())}`)
-        reset()
-      }}
+      onSuccess={handleSuccess}
       className="grid gap-4"
     >
       <div className="grid gap-1">
