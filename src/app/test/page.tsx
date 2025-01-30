@@ -16,13 +16,19 @@ export default function TestPage() {
     formState: { errors },
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
+    progressive: true,
   })
   const [state, action, pending] = useActionState(createPost, false)
 
   return (
-    <Form control={control} action={action}>
+    <Form control={control} action="/api/post" method="post">
       <Label htmlFor="title">Title</Label>
-      <Input {...register('title')} type="text" placeholder="title" />
+      <Input
+        id="title"
+        {...register('title', { required: 'Title is required' })}
+        type="text"
+        placeholder="title"
+      />
 
       {errors.title && <p>{errors.title.message}</p>}
 
