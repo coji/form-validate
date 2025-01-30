@@ -17,8 +17,6 @@ export default function TestPage() {
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     progressive: true,
-    mode: 'onSubmit',
-    reValidateMode: 'onBlur',
   })
 
   const handleSuccess = async ({ response }: { response: Response }) => {
