@@ -14,7 +14,14 @@ export default function Home() {
           priority
         />
 
-        <Link href="/test">Test</Link>
+        <ul>
+          <li>
+            <Link href="/rhf_form">React Hook Form / Form コンポーネント</Link>
+          </li>
+          <li>
+            <Link href="/rhf_csr">React Hook Form / Client Side Rendering</Link>
+          </li>
+        </ul>
       </main>
 
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">

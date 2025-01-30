@@ -3,11 +3,11 @@ import { setTimeout } from 'node:timers/promises'
 import { formSchema } from './schema'
 
 export async function createPost(previousState: boolean, formData: FormData) {
-  const { title } = formSchema.parse({
-    title: formData.get('title'),
+  const { name } = formSchema.parse({
+    name: formData.get('title'),
   })
 
-  console.log({ title })
+  console.log({ name })
   await setTimeout(1000)
 
   return true
