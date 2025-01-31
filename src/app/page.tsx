@@ -14,12 +14,17 @@ export default function Home() {
           priority
         />
 
-        <ul>
+        <ul className="list-decimal">
           <li>
-            <Link href="/rhf_form">React Hook Form / Form コンポーネント</Link>
+            <Link href="/rhf_oldstyle">React Hook Form / Old Style + API</Link>
           </li>
           <li>
-            <Link href="/rhf_csr">React Hook Form / Client Side Rendering</Link>
+            <Link href="/rhf_form">React Hook Form / Form + API</Link>
+          </li>
+          <li>
+            <Link href="/rhf_serveractions">
+              React Hook Form / useActionState + Server Actions
+            </Link>
           </li>
         </ul>
       </main>

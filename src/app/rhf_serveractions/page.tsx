@@ -23,7 +23,10 @@ export default function TestPage() {
       <form
         ref={formRef}
         action={action}
-        onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+        onSubmit={form.handleSubmit((data) => {
+          console.log({ data })
+          formRef.current?.submit()
+        })}
         className="grid gap-4"
       >
         <div className="grid gap-1">
@@ -57,6 +60,8 @@ export default function TestPage() {
         <Button type="submit" disabled={isPending}>
           Submit
         </Button>
+
+        {state && <div>{state.message}</div>}
       </form>
     </Form>
   )
