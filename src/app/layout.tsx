@@ -29,7 +29,22 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster richColors />
-        {children}
+        <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
+          <header className="bg-gray-800 p-4 text-white">
+            <h1 className="text-2xl font-bold">
+              Next.js Form Validation Examples
+            </h1>
+          </header>
+          <main>{children}</main>
+          <footer>
+            <p className="p-4 text-center text-gray-500">
+              &copy; {new Date().getFullYear()}{' '}
+              <a href="https://github.com/coji/nextjs-form-validate">
+                source codes
+              </a>
+            </p>
+          </footer>
+        </div>
       </body>
     </html>
   )
