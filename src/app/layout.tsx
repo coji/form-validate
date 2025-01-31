@@ -39,8 +39,12 @@ export default function RootLayout({
           <footer>
             <p className="p-4 text-center text-gray-500">
               &copy; {new Date().getFullYear()}{' '}
-              <a href="https://github.com/coji/nextjs-form-validate">
-                source codes
+              <a
+                href="https://github.com/coji/form-validate"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github
               </a>
             </p>
           </footer>
