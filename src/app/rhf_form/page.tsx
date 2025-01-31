@@ -4,29 +4,32 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { formSchema, type FormSchema } from './schema'
 
 export default function TestPage() {
-  const {
-    register,
-    control,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormSchema>({
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     progressive: true,
+    defaultValues: {
+      name: 'foobar',
+      email: 'foobar@example.com',
+    },
   })
+  const [lastResult, setLastResult] = useState<object | null>(null)
 
   const handleSuccess = async ({ response }: { response: Response }) => {
-    toast.success(`success!: ${JSON.stringify(await response.json())}`)
-    reset()
+    const result = (await response.json()) as object
+    setLastResult(result)
+    toast.success(`success!: ${JSON.stringify(result)}`)
+    form.reset({ email: '', name: '' })
   }
 
   return (
     <Form
-      control={control}
+      control={form.control}
       action="/rhf_form/api"
       method="post"
       onSuccess={handleSuccess}
@@ -38,9 +41,11 @@ export default function TestPage() {
           id="name"
           type="text"
           placeholder="title"
-          {...register('name', { required: 'Name is required' })}
+          {...form.register('name', { required: 'Name is required' })}
         />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+        {form.formState.errors.name && (
+          <p className="text-red-500">{form.formState.errors.name.message}</p>
+        )}
       </div>
 
       <div className="grid gap-1">
@@ -49,14 +54,18 @@ export default function TestPage() {
           id="email"
           type="email"
           placeholder="email"
-          {...register('email', { required: 'Email is required' })}
+          {...form.register('email', { required: 'Email is required' })}
         />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+        {form.formState.errors.email && (
+          <p className="text-red-500">{form.formState.errors.email.message}</p>
+        )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" disabled={form.formState.isSubmitting}>
         Submit
       </Button>
+
+      {lastResult && <div>last result: {JSON.stringify(lastResult)}</div>}
     </Form>
   )
 }

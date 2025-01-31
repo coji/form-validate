@@ -14,6 +14,10 @@ import { formSchema } from './schema'
 export default function TestPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: 'foobar',
+      email: 'foobar@example.com',
+    },
   })
   const formRef = useRef<HTMLFormElement>(null)
   const [state, action, isPending] = useActionState(createPost, null)
@@ -61,7 +65,7 @@ export default function TestPage() {
           Submit
         </Button>
 
-        {state && <div>{state.message}</div>}
+        {state && <div>last result: {state.message}</div>}
       </form>
     </Form>
   )
