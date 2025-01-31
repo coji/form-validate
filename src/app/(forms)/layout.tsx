@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { usePathname } from 'next/navigation'
+import { RouteTitles } from '../constants'
 
 export default function FormsLayout({
   children,
@@ -15,12 +16,13 @@ export default function FormsLayout({
   children: React.ReactNode
 }>) {
   const pathname = usePathname()
+  const route = RouteTitles.find((route) => route.pathname === pathname)
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Forms</CardTitle>
-        <CardDescription>{pathname}</CardDescription>
+        <CardTitle>{route?.title ?? 'Unknown'}</CardTitle>
+        <CardDescription>{route?.description ?? 'Unknown'}</CardDescription>
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>

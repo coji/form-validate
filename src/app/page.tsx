@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { RouteTitles } from './constants'
 
 export default function Home() {
   return (
@@ -15,17 +16,17 @@ export default function Home() {
         />
 
         <ul className="list-decimal">
-          <li>
-            <Link href="/rhf_oldstyle">React Hook Form / Old Style + API</Link>
-          </li>
-          <li>
-            <Link href="/rhf_form">React Hook Form / Form + API</Link>
-          </li>
-          <li>
-            <Link href="/rhf_serveractions">
-              React Hook Form / Form + useActionState + Server Actions
-            </Link>
-          </li>
+          {RouteTitles.map((route) => (
+            <li key={route.pathname}>
+              <Link href={route.pathname} className="hover:underline">
+                {route.title}
+                <small className="text-muted-foreground">
+                  {' '}
+                  - {route.description}
+                </small>
+              </Link>
+            </li>
+          ))}
         </ul>
       </main>
 
