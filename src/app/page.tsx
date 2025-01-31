@@ -23,7 +23,7 @@ export default function Home() {
           </li>
           <li>
             <Link href="/rhf_serveractions">
-              React Hook Form / useActionState + Server Actions
+              React Hook Form / Form + useActionState + Server Actions
             </Link>
           </li>
         </ul>
