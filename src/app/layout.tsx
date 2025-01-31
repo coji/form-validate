@@ -30,12 +30,12 @@ export default function RootLayout({
       >
         <Toaster richColors />
         <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
-          <header className="bg-gray-800 p-4 text-white">
+          <header className="p-4">
             <h1 className="text-2xl font-bold">
               Next.js Form Validation Examples
             </h1>
           </header>
-          <main>{children}</main>
+          <main className="px-4">{children}</main>
           <footer>
             <p className="p-4 text-center text-gray-500">
               &copy; {new Date().getFullYear()}{' '}
