@@ -1,6 +1,7 @@
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import Link from 'next/link'
 import './globals.css'
 
 const geistSans = Geist({
@@ -33,7 +34,7 @@ export default function RootLayout({
         <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
           <header className="p-4">
             <h1 className="text-2xl font-bold">
-              Next.js Form Validation Examples
+              <Link href="/">Next.js Form Validation Examples</Link>
             </h1>
           </header>
 
