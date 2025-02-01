@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useActionState, useTransition } from 'react'
+import { useActionState, useEffect, useTransition } from 'react'
 import { Form, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import type { z } from 'zod'
 import { createPost } from './action'
 import { formSchema } from './schema'
@@ -21,6 +22,14 @@ export default function TestPage() {
   })
   const [state, action, isPending] = useActionState(createPost, null)
   const [, startTransition] = useTransition()
+
+  // Show toast message when state changes
+  useEffect(() => {
+    if (state) {
+      form.reset({ name: '', email: '' })
+      toast.success(state.message)
+    }
+  }, [state, form])
 
   return (
     <Form
