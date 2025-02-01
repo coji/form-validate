@@ -1,14 +1,15 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useActionState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import type { z } from 'zod'
+import { createPost } from './action'
 import { formSchema } from './schema'
 
 export default function TestPage() {
@@ -19,28 +20,17 @@ export default function TestPage() {
       email: 'foobar@example.com',
     },
   })
-  const [lastResult, setLastResult] = useState<object | null>(null)
-
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const response = await fetch('/rhf_oldstyle/api', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
-    if (!response.ok) {
-      toast.error('An error occurred', {
-        description: response.statusText,
-      })
-      return
-    }
-    const result: object = await response.json()
-    setLastResult(result)
-    toast.success(`success!: ${JSON.stringify(result)}`)
-    form.reset({ email: '', name: '' })
-  }
+  const formRef = useRef<HTMLFormElement>(null)
+  const [state, action, isPending] = useActionState(createPost, null)
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+      <form
+        ref={formRef}
+        action={action}
+        onSubmit={form.handleSubmit(() => formRef.current?.submit())}
+        className="grid gap-4"
+      >
         <div className="grid gap-1">
           <Label htmlFor="name">Name</Label>
           <Input
@@ -69,11 +59,16 @@ export default function TestPage() {
           )}
         </div>
 
-        <Button type="submit" disabled={form.formState.isSubmitting}>
+        <Button type="submit" disabled={isPending}>
           Submit
         </Button>
 
-        {lastResult && <div>last result: {JSON.stringify(lastResult)}</div>}
+        {state && (
+          <div className="flex gap-2">
+            <Badge variant="secondary">Last Result</Badge>
+            <div>{state.message}</div>
+          </div>
+        )}
       </form>
     </Form>
   )

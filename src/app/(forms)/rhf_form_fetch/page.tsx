@@ -30,7 +30,7 @@ export default function TestPage() {
   return (
     <Form
       control={form.control}
-      action="/rhf_form/api"
+      action="/rhf_form_fetch/api"
       method="post"
       onSuccess={handleSuccess}
       className="grid gap-4"

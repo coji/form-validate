@@ -1,5 +1,6 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -61,7 +62,12 @@ export default function TestPage() {
         Submit
       </Button>
 
-      {state && <div>last result: {state.message}</div>}
+      {state && (
+        <div className="flex gap-2">
+          <Badge variant="secondary">Last Result</Badge>
+          <div>{state.message}</div>
+        </div>
+      )}
     </Form>
   )
 }
