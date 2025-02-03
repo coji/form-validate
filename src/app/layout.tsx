@@ -32,13 +32,13 @@ export default function RootLayout({
         <Toaster richColors />
 
         <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
-          <header className="p-4">
+          <header className="border-b px-4 py-2">
             <h1 className="text-2xl font-bold">
               <Link href="/">Next.js Form Validation Examples</Link>
             </h1>
           </header>
 
-          <main className="px-4">{children}</main>
+          <main className="px-4 py-2">{children}</main>
 
           <footer>
             <p className="p-4 text-center">
