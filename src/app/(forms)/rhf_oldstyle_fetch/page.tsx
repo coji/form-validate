@@ -12,19 +12,15 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 import { formSchema } from './schema'
 
-export default function TestPage() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: 'foobar',
-      email: 'foobar@example.com',
-    },
-  })
-  const [lastResult, setLastResult] = useState<z.infer<
-    typeof formSchema
-  > | null>(null)
+type FormData = z.infer<typeof formSchema>
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+export default function TestPage() {
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { email: 'foobar@example.com' },
+  })
+  const [lastResult, setLastResult] = useState<FormData | null>(null)
+  const onSubmit = async (data: FormData) => {
     const response = await fetch('/rhf_oldstyle_fetch/api', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -36,28 +32,15 @@ export default function TestPage() {
       })
       return
     }
-    const result: z.infer<typeof formSchema> = await response.json()
+    const result: FormData = await response.json()
     setLastResult(result)
     toast.success(`success!: ${JSON.stringify(result)}`)
-    form.reset({ email: '', name: '' })
+    form.reset({ email: '' })
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-        <div className="grid gap-1">
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
-            placeholder="title"
-            {...form.register('name', { required: 'Name is required' })}
-          />
-          {form.formState.errors.name && (
-            <p className="text-red-500">{form.formState.errors.name.message}</p>
-          )}
-        </div>
-
         <div className="grid gap-1">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -79,8 +62,8 @@ export default function TestPage() {
 
         {lastResult && (
           <div>
-            <Badge variant="secondary">Last Result</Badge> Post created:{' '}
-            {lastResult.email}
+            <Badge variant="secondary">Last Result</Badge>
+            Post created: {lastResult.email}
           </div>
         )}
       </form>

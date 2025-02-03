@@ -12,11 +12,12 @@ import type { z } from 'zod'
 import { createPost } from './action'
 import { formSchema } from './schema'
 
+type FormData = z.infer<typeof formSchema>
+
 export default function TestPage() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: 'foobar',
       email: 'foobar@example.com',
     },
   })
@@ -26,7 +27,7 @@ export default function TestPage() {
   // Show toast message when state changes
   useEffect(() => {
     if (lastResult) {
-      form.reset({ name: '', email: '' })
+      form.reset({ email: '' })
       toast.success(`Post created: ${lastResult.email}`)
     }
   }, [lastResult, form])
@@ -41,19 +42,6 @@ export default function TestPage() {
       }
       className="grid gap-4"
     >
-      <div className="grid gap-1">
-        <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          type="text"
-          placeholder="title"
-          {...form.register('name', { required: 'Name is required' })}
-        />
-        {form.formState.errors.name && (
-          <p className="text-red-500">{form.formState.errors.name.message}</p>
-        )}
-      </div>
-
       <div className="grid gap-1">
         <Label htmlFor="email">Email</Label>
         <Input

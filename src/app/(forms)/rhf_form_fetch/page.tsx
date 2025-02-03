@@ -11,24 +11,23 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 import { formSchema, type FormSchema } from './schema'
 
+type FormData = z.infer<typeof formSchema>
+
 export default function TestPage() {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     progressive: true,
     defaultValues: {
-      name: 'foobar',
       email: 'foobar@example.com',
     },
   })
-  const [lastResult, setLastResult] = useState<z.infer<
-    typeof formSchema
-  > | null>(null)
+  const [lastResult, setLastResult] = useState<FormData | null>(null)
 
   const handleSuccess = async ({ response }: { response: Response }) => {
-    const result: z.infer<typeof formSchema> = await response.json()
+    const result: FormData = await response.json()
     setLastResult(result)
     toast.success(`success!: ${JSON.stringify(result)}`)
-    form.reset({ email: '', name: '' })
+    form.reset({ email: '' })
   }
 
   return (
@@ -39,19 +38,6 @@ export default function TestPage() {
       onSuccess={handleSuccess}
       className="grid gap-4"
     >
-      <div className="grid gap-1">
-        <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          type="text"
-          placeholder="title"
-          {...form.register('name', { required: 'Name is required' })}
-        />
-        {form.formState.errors.name && (
-          <p className="text-red-500">{form.formState.errors.name.message}</p>
-        )}
-      </div>
-
       <div className="grid gap-1">
         <Label htmlFor="email">Email</Label>
         <Input
