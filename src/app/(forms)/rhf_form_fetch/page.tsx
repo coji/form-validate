@@ -1,5 +1,6 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -7,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import type { z } from 'zod'
 import { formSchema, type FormSchema } from './schema'
 
 export default function TestPage() {
@@ -18,10 +20,12 @@ export default function TestPage() {
       email: 'foobar@example.com',
     },
   })
-  const [lastResult, setLastResult] = useState<object | null>(null)
+  const [lastResult, setLastResult] = useState<z.infer<
+    typeof formSchema
+  > | null>(null)
 
   const handleSuccess = async ({ response }: { response: Response }) => {
-    const result = (await response.json()) as object
+    const result: z.infer<typeof formSchema> = await response.json()
     setLastResult(result)
     toast.success(`success!: ${JSON.stringify(result)}`)
     form.reset({ email: '', name: '' })
@@ -65,7 +69,12 @@ export default function TestPage() {
         Submit
       </Button>
 
-      {lastResult && <div>last result: {JSON.stringify(lastResult)}</div>}
+      {lastResult && (
+        <div>
+          <Badge variant="secondary">Last Result</Badge> Post created:{' '}
+          {lastResult.email}
+        </div>
+      )}
     </Form>
   )
 }

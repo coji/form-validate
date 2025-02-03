@@ -12,5 +12,5 @@ export async function createPost(previousState: unknown, formData: FormData) {
   console.log({ name, email })
   await setTimeout(1000)
 
-  return { message: `Post created: ${name} ${email}` }
+  return { name, email }
 }

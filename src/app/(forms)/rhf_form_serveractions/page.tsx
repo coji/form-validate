@@ -20,16 +20,16 @@ export default function TestPage() {
       email: 'foobar@example.com',
     },
   })
-  const [state, action, isPending] = useActionState(createPost, null)
+  const [lastResult, action, isPending] = useActionState(createPost, null)
   const [, startTransition] = useTransition()
 
   // Show toast message when state changes
   useEffect(() => {
-    if (state) {
+    if (lastResult) {
       form.reset({ name: '', email: '' })
-      toast.success(state.message)
+      toast.success(`Post created: ${lastResult.email}`)
     }
-  }, [state, form])
+  }, [lastResult, form])
 
   return (
     <Form
@@ -71,10 +71,10 @@ export default function TestPage() {
         Submit
       </Button>
 
-      {state && (
+      {lastResult && (
         <div className="flex gap-2">
           <Badge variant="secondary">Last Result</Badge>
-          <div>{state.message}</div>
+          Post created: {lastResult.email}
         </div>
       )}
     </Form>

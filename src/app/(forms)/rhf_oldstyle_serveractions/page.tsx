@@ -22,15 +22,15 @@ export default function TestPage() {
     },
   })
   const formRef = useRef<HTMLFormElement>(null)
-  const [state, action, isPending] = useActionState(createPost, null)
+  const [lastResult, action, isPending] = useActionState(createPost, null)
 
   // Show toast message when state changes
   useEffect(() => {
-    if (state) {
+    if (lastResult) {
       form.reset({ name: '', email: '' })
-      toast.success(state.message)
+      toast.success(`Post created: ${lastResult.email}`)
     }
-  }, [state, form])
+  }, [lastResult, form])
 
   return (
     <Form {...form}>
@@ -72,10 +72,10 @@ export default function TestPage() {
           Submit
         </Button>
 
-        {state && (
-          <div className="flex gap-2">
+        {lastResult && (
+          <div>
             <Badge variant="secondary">Last Result</Badge>
-            <div>{state.message}</div>
+            Post created: {lastResult.email}
           </div>
         )}
       </form>

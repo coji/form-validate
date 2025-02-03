@@ -1,5 +1,6 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -19,7 +20,9 @@ export default function TestPage() {
       email: 'foobar@example.com',
     },
   })
-  const [lastResult, setLastResult] = useState<object | null>(null)
+  const [lastResult, setLastResult] = useState<z.infer<
+    typeof formSchema
+  > | null>(null)
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const response = await fetch('/rhf_oldstyle_fetch/api', {
@@ -27,12 +30,13 @@ export default function TestPage() {
       body: JSON.stringify(data),
     })
     if (!response.ok) {
+      setLastResult(null)
       toast.error('An error occurred', {
         description: response.statusText,
       })
       return
     }
-    const result: object = await response.json()
+    const result: z.infer<typeof formSchema> = await response.json()
     setLastResult(result)
     toast.success(`success!: ${JSON.stringify(result)}`)
     form.reset({ email: '', name: '' })
@@ -73,7 +77,12 @@ export default function TestPage() {
           Submit
         </Button>
 
-        {lastResult && <div>last result: {JSON.stringify(lastResult)}</div>}
+        {lastResult && (
+          <div>
+            <Badge variant="secondary">Last Result</Badge> Post created:{' '}
+            {lastResult.email}
+          </div>
+        )}
       </form>
     </Form>
   )
