@@ -29,7 +29,7 @@ export default function TestPage() {
       }
 
       setIsLoading(true)
-      const res = await fetch('/conform_fetch/api', {
+      const res = await fetch('/conform_oldstyle_fetch/api', {
         method: 'POST',
         body: JSON.stringify(submission.value),
         headers: { 'Content-Type': 'application/json' },
