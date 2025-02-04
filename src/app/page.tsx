@@ -20,10 +20,6 @@ export default function Home() {
             <li key={route.pathname}>
               <Link href={route.pathname} className="hover:underline">
                 {route.title}
-                <small className="text-muted-foreground">
-                  {' '}
-                  - {route.description}
-                </small>
               </Link>
             </li>
           ))}
