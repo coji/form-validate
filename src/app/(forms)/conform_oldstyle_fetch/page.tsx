@@ -47,7 +47,7 @@ export default function TestPage() {
   })
 
   return (
-    <form {...getFormProps(form)} className="grid gap-4">
+    <form {...getFormProps(form)} method="post" className="grid gap-4">
       <div className="grid gap-1">
         <Label htmlFor={email.id}>Email</Label>
         <Input
