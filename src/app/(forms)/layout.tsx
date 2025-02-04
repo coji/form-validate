@@ -83,7 +83,7 @@ export default function FormsLayout({
         <CardContent>{children}</CardContent>
       </Card>
 
-      <div className="mx-auto text-sm">
+      <div className="mx-auto text-xs text-muted-foreground">
         <a
           href={`https://github.com/coji/form-validate/tree/main/src/app/(forms)${currentRoute.pathname}`}
           target="_blank"
