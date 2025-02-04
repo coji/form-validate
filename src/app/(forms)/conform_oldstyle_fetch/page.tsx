@@ -55,7 +55,7 @@ export default function TestPage() {
           {...getInputProps(email, { type: 'email' })}
           key={email.key}
         />
-        {email.errors && <p className="text-red-500">{email.errors}</p>}
+        {email.errors && <p className="text-sm text-red-500">{email.errors}</p>}
       </div>
 
       <Button type="submit" disabled={isLoading}>
@@ -64,8 +64,8 @@ export default function TestPage() {
 
       {lastResult && (
         <div>
-          <Badge variant="secondary">Last Result</Badge>
-          Post created: {lastResult.email}
+          <Badge variant="secondary">Last Result</Badge> Post created:{' '}
+          {lastResult.email}
         </div>
       )}
     </form>

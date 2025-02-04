@@ -46,7 +46,9 @@ export default function TestPage() {
           {...form.register('email', { required: 'Email is required' })}
         />
         {form.formState.errors.email && (
-          <p className="text-red-500">{form.formState.errors.email.message}</p>
+          <p className="text-sm text-red-500">
+            {form.formState.errors.email.message}
+          </p>
         )}
       </div>
 
@@ -57,8 +59,8 @@ export default function TestPage() {
 
       {lastResult && (
         <div>
-          <Badge variant="secondary">Last Result</Badge>
-          Post created: {lastResult.email}
+          <Badge variant="secondary">Last Result</Badge> Post created:{' '}
+          {lastResult.email}
         </div>
       )}
     </Form>
