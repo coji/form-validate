@@ -64,8 +64,8 @@ export default function TestPage() {
 
       {lastResult && (
         <div>
-          <Badge variant="secondary">Last Result</Badge> Post created:{' '}
-          {lastResult.email}
+          <Badge variant="secondary">Last Result</Badge>
+          Post created: {lastResult.email}
         </div>
       )}
     </form>
