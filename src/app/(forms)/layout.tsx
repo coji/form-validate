@@ -77,6 +77,17 @@ export default function FormsLayout({
         </CardHeader>
         <CardContent>{children}</CardContent>
       </Card>
+
+      <div className="mx-auto text-sm">
+        <a
+          href={`https://github.com/coji/form-validate/tree/main/src/app/(forms)/${currentRoute.pathname}`}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:underline"
+        >
+          ソースコード
+        </a>
+      </div>
     </div>
   )
 }
