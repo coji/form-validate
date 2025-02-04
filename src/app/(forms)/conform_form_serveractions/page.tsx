@@ -58,6 +58,3 @@ export default function TestPage() {
     </form>
   )
 }
-function useToast() {
-  throw new Error('Function not implemented.')
-}
