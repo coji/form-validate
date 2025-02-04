@@ -55,7 +55,11 @@ export default function TestPage() {
           {...getInputProps(email, { type: 'email' })}
           key={email.key}
         />
-        {email.errors && <p className="text-sm text-red-500">{email.errors}</p>}
+        {email.errors && (
+          <p id={email.errorId} className="text-sm text-red-500">
+            {email.errors}
+          </p>
+        )}
       </div>
 
       <Button type="submit" disabled={isLoading}>
