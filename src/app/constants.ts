@@ -20,4 +20,9 @@ export const RouteTitles = [
     description:
       'Form component / useActionState / Server Actions / useTransition',
   },
+  {
+    pathname: '/conform_fetch',
+    title: 'Conform - Fetch',
+    description: 'Client Side Rendering and Fetch API',
+  },
 ] as const

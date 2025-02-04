@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LoaderIcon } from 'lucide-react'
 import { useActionState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -54,6 +55,7 @@ export default function TestPage() {
         </div>
 
         <Button type="submit" disabled={isPending}>
+          {isPending && <LoaderIcon className="animate-spin" />}
           Submit
         </Button>
 

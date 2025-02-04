@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LoaderIcon } from 'lucide-react'
 import { useActionState, useEffect, useTransition } from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -17,9 +18,8 @@ type FormData = z.infer<typeof formSchema>
 export default function TestPage() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: 'foobar@example.com',
-    },
+    defaultValues: { email: 'foobar@example.com' },
+    progressive: true,
   })
   const [lastResult, action, isPending] = useActionState(createPost, null)
   const [, startTransition] = useTransition()
@@ -56,6 +56,7 @@ export default function TestPage() {
       </div>
 
       <Button type="submit" disabled={isPending}>
+        {isPending && <LoaderIcon className="animate-spin" />}
         Submit
       </Button>
 
