@@ -9,11 +9,8 @@ import { parseWithZod } from '@conform-to/zod'
 import { LoaderIcon } from 'lucide-react'
 import { useActionState, useEffect } from 'react'
 import { toast } from 'sonner'
-import type { z } from 'zod'
 import { createPost } from './action'
 import { formSchema } from './schema'
-
-type FormData = z.infer<typeof formSchema>
 
 export default function TestPage() {
   const [result, action, isPending] = useActionState(createPost, null)
