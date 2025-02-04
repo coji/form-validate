@@ -80,7 +80,7 @@ export default function FormsLayout({
 
       <div className="mx-auto text-sm">
         <a
-          href={`https://github.com/coji/form-validate/tree/main/src/app/(forms)/${currentRoute.pathname}`}
+          href={`https://github.com/coji/form-validate/tree/main/src/app/(forms)${currentRoute.pathname}`}
           target="_blank"
           rel="noreferrer"
           className="hover:underline"
