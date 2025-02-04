@@ -30,4 +30,9 @@ export const RouteTitles = [
     title: 'Conform - Server Actions',
     description: 'Client Side Rendering and Server Actions',
   },
+  {
+    pathname: '/conform_dynamic',
+    title: 'Conform - Dynamic',
+    description: 'Dynamic form rendering',
+  },
 ] as const
