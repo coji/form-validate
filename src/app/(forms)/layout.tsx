@@ -5,7 +5,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import {
@@ -15,8 +14,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { ChevronDownIcon } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { RouteTitles } from '../constants'
 
 export default function FormsLayout({
@@ -24,8 +30,13 @@ export default function FormsLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const router = useRouter()
   const pathname = usePathname()
-  const route = RouteTitles.find((route) => route.pathname === pathname)
+  const currentRoute = RouteTitles.find((route) => route.pathname === pathname)
+
+  if (!currentRoute) {
+    return <></>
+  }
 
   return (
     <div className="grid gap-2">
@@ -38,15 +49,31 @@ export default function FormsLayout({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{route?.title}</BreadcrumbPage>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1">
+                {currentRoute.title} <ChevronDownIcon className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {RouteTitles.map((route) => (
+                  <DropdownMenuItem
+                    key={route.pathname}
+                    onSelect={() => {
+                      router.push(route.pathname)
+                    }}
+                  >
+                    {route.title}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <Card className="mx-auto w-[30rem]">
         <CardHeader>
-          <CardTitle>{route?.title}</CardTitle>
-          <CardDescription>{route?.description ?? 'Unknown'}</CardDescription>
+          <CardTitle>{currentRoute.title}</CardTitle>
+          <CardDescription>{currentRoute.description}</CardDescription>
         </CardHeader>
         <CardContent>{children}</CardContent>
       </Card>
