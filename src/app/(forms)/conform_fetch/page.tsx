@@ -18,49 +18,44 @@ export default function TestPage() {
   const [lastResult, setLastResult] = useState<FormData | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit: Parameters<typeof useForm>[0]['onSubmit'] = async (
-    event,
-    { submission },
-  ) => {
-    event.preventDefault()
-    if (submission?.status !== 'success') {
-      return
-    }
-
-    setIsLoading(true)
-    const res = await fetch('/conform_fetch/api', {
-      method: 'POST',
-      body: JSON.stringify(submission.value),
-      headers: { 'Content-Type': 'application/json' },
-    })
-    if (res.ok) {
-      const result = await res.json()
-      setLastResult(result)
-      toast.success(`success!: ${JSON.stringify(result)}`)
-    } else {
-      toast.error(`There was an error: ${res.statusText}`)
-    }
-    setIsLoading(false)
-  }
-
-  const [form, fields] = useForm({
+  const [form, { email }] = useForm({
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
     defaultValue: { email: 'foobar@example.com' },
-    onSubmit: handleSubmit,
+    onSubmit: async (event, { submission }) => {
+      event.preventDefault()
+      if (submission?.status !== 'success') {
+        return
+      }
+
+      setIsLoading(true)
+      const res = await fetch('/conform_fetch/api', {
+        method: 'POST',
+        body: JSON.stringify(submission.value),
+        headers: { 'Content-Type': 'application/json' },
+      })
+      if (res.ok) {
+        const result = await res.json()
+        setLastResult(result)
+        toast.success(`success!: ${JSON.stringify(result)}`)
+        form.update({ name: email.name, value: '', validated: false })
+      } else {
+        toast.error(`There was an error: ${res.statusText}`)
+      }
+      setIsLoading(false)
+    },
   })
 
   return (
     <form {...getFormProps(form)} className="grid gap-4">
       <div className="grid gap-1">
-        <Label htmlFor={fields.email.id}>Email</Label>
+        <Label htmlFor={email.id}>Email</Label>
         <Input
           placeholder="email"
-          {...getInputProps(fields.email, { type: 'email' })}
+          {...getInputProps(email, { type: 'email' })}
+          key={email.key}
         />
-        {fields.email.errors ? (
-          <p className="text-red-500">{fields.email.errors}</p>
-        ) : null}
+        {email.errors && <p className="text-red-500">{email.errors}</p>}
       </div>
 
       <Button type="submit" disabled={isLoading}>
