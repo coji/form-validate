@@ -1,4 +1,10 @@
-export const RouteTitles = [
+interface RouteTitle {
+  pathname: string
+  title: string
+  description: string
+  warning?: string
+}
+export const RouteTitles: RouteTitle[] = [
   {
     pathname: '/rhf_oldstyle_fetch',
     title: 'React Hook Form - Old Style Fetch',
@@ -8,6 +14,7 @@ export const RouteTitles = [
     pathname: '/rhf_oldstyle_serveractions',
     title: 'React Hook Form - Old Style Server Actions',
     description: 'Client Side Rendering and Server Actions',
+    warning: 'This example doesn’t work after the soft navigation.',
   },
   {
     pathname: '/rhf_form_fetch',
@@ -35,4 +42,4 @@ export const RouteTitles = [
     title: 'Conform - Dynamic',
     description: 'Dynamic form rendering',
   },
-] as const
+]

@@ -74,6 +74,11 @@ export default function FormsLayout({
         <CardHeader>
           <CardTitle>{currentRoute.title}</CardTitle>
           <CardDescription>{currentRoute.description}</CardDescription>
+          {currentRoute.warning && (
+            <div className="text-sm font-semibold text-red-500">
+              {currentRoute.warning}
+            </div>
+          )}
         </CardHeader>
         <CardContent>{children}</CardContent>
       </Card>
