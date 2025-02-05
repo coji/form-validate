@@ -34,11 +34,7 @@ export default function TestPage() {
   return (
     <Form
       control={form.control}
-      onSubmit={({ formData }) =>
-        startTransition(async () => {
-          action(formData)
-        })
-      }
+      onSubmit={({ formData }) => startTransition(() => action(formData))}
       className="grid gap-4"
     >
       <div className="grid gap-1">
