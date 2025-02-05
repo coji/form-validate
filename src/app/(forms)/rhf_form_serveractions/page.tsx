@@ -34,7 +34,10 @@ export default function TestPage() {
   return (
     <Form
       control={form.control}
-      onSubmit={({ formData }) => startTransition(() => action(formData))}
+      onSubmit={({ formData, event }) => {
+        event?.preventDefault()
+        startTransition(() => action(formData))
+      }}
       className="grid gap-4"
     >
       <div className="grid gap-1">
