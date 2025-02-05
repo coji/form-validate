@@ -8,6 +8,7 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { LoaderIcon } from 'lucide-react'
 import { useState } from 'react'
+import { useFormStatus } from 'react-dom'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 import { formSchema } from './schema'
@@ -16,7 +17,7 @@ type FormData = z.infer<typeof formSchema>
 
 export default function TestPage() {
   const [lastResult, setLastResult] = useState<FormData | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const { pending: isPending } = useFormStatus()
 
   const [form, { email }] = useForm({
     onValidate: ({ formData }) =>
@@ -28,7 +29,6 @@ export default function TestPage() {
         return
       }
 
-      setIsLoading(true)
       const res = await fetch('/conform_oldstyle_fetch/api', {
         method: 'POST',
         body: JSON.stringify(submission.value),
@@ -42,7 +42,6 @@ export default function TestPage() {
       } else {
         toast.error(`There was an error: ${res.statusText}`)
       }
-      setIsLoading(false)
     },
   })
 
@@ -62,8 +61,8 @@ export default function TestPage() {
         )}
       </div>
 
-      <Button type="submit" disabled={isLoading}>
-        {isLoading && <LoaderIcon className="animate-spin" />} Submit
+      <Button type="submit" disabled={isPending}>
+        {isPending && <LoaderIcon className="animate-spin" />} Submit
       </Button>
 
       {lastResult && (
