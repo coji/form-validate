@@ -88,8 +88,7 @@ export default function TestPage() {
       {result?.value && (
         <div>
           <Badge variant="secondary">Last Result</Badge> Post created:{' '}
-          {result.value.email}{' '}
-          {result.value.option && `(${result.value.option})`}
+          {result.value.email} {result.value.option && `(${result.value.memo})`}
         </div>
       )}
     </form>
