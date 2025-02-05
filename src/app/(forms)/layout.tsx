@@ -70,7 +70,7 @@ export default function FormsLayout({
         </BreadcrumbList>
       </Breadcrumb>
 
-      <Card className="mx-auto w-[30rem]">
+      <Card className="mx-auto w-full md:w-[350px]">
         <CardHeader>
           <CardTitle>{currentRoute.title}</CardTitle>
           <CardDescription>{currentRoute.description}</CardDescription>
