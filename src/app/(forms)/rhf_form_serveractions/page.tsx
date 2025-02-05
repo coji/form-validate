@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderIcon } from 'lucide-react'
-import { useActionState, useEffect } from 'react'
+import { startTransition, useActionState, useEffect } from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from 'zod'
@@ -34,8 +34,11 @@ export default function TestPage() {
   return (
     <Form
       control={form.control}
-      method="post"
-      action={action}
+      onSubmit={({ formData }) =>
+        startTransition(async () => {
+          action(formData)
+        })
+      }
       className="grid gap-4"
     >
       <div className="grid gap-1">
