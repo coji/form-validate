@@ -51,7 +51,7 @@ export default function TestPage() {
           {...form.register('email', { required: 'Email is required' })}
         />
         {form.formState.errors.email && (
-          <p className="text-accent-red-500 text-sm">
+          <p className="text-sm text-red-500">
             {form.formState.errors.email.message}
           </p>
         )}
