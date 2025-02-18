@@ -44,6 +44,15 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      conform-react:
+        specifier: ^0.0.7
+        version: 0.0.7(react@19.0.0)
+      conform-zod:
+        specifier: ^0.0.7
+        version: 0.0.7(zod@3.24.1)
+      input-otp:
+        specifier: ^1.4.2
+        version: 1.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       lucide-react:
         specifier: ^0.474.0
         version: 0.474.0(react@19.0.0)
@@ -1016,6 +1025,19 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
+  conform-dom@0.0.7:
+    resolution: {integrity: sha512-sVQc91eBvJsHHGJRGWq05ZEIWeQjePf8/kAhUFlz/370ecvnwyEDnCiAnL9xtCsy2ya68Aep5CfrXyx3vamu4g==}
+
+  conform-react@0.0.7:
+    resolution: {integrity: sha512-b3tvI3dQ0i+C7nPHNDal1JIgnmdL32268dDqNPFP8ub37a2JnmW8Z77PA5V4jgJQsAys413/CM8CrVxVwo1VlQ==}
+    peerDependencies:
+      react: '>=18'
+
+  conform-zod@0.0.7:
+    resolution: {integrity: sha512-8qQtTYlI5dODfYixzaRny71TSjSBLI1tgHb79+KOlkIw5Yf+FoF8q4iFRDHcOPMOBppwInyGVinESwUV0FWn2Q==}
+    peerDependencies:
+      zod: ^3.21.0
+
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -1405,6 +1427,12 @@ packages:
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
+
+  input-otp@1.4.2:
+    resolution: {integrity: sha512-l3jWwYNvrEa6NTCt7BECfCm48GvwuZzkoeG3gBL2w4CHeOXW3eKFmf9UNYkNfYc3mxMrthMnxjIE07MT0zLBQA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
 
   internal-slot@1.1.0:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
@@ -3173,6 +3201,18 @@ snapshots:
 
   concat-map@0.0.1: {}
 
+  conform-dom@0.0.7: {}
+
+  conform-react@0.0.7(react@19.0.0):
+    dependencies:
+      conform-dom: 0.0.7
+      react: 19.0.0
+
+  conform-zod@0.0.7(zod@3.24.1):
+    dependencies:
+      conform-dom: 0.0.7
+      zod: 3.24.1
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -3713,6 +3753,11 @@ snapshots:
       resolve-from: 4.0.0
 
   imurmurhash@0.1.4: {}
+
+  input-otp@1.4.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   internal-slot@1.1.0:
     dependencies:

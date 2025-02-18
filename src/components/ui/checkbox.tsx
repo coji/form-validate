@@ -27,4 +27,6 @@ const Checkbox = React.forwardRef<
 ))
 Checkbox.displayName = CheckboxPrimitive.Root.displayName
 
-export { Checkbox }
+type CheckboxProps = React.ComponentProps<typeof Checkbox>
+
+export { Checkbox, type CheckboxProps }

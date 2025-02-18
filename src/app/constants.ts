@@ -42,4 +42,9 @@ export const RouteTitles: RouteTitle[] = [
     title: 'Conform - Dynamic',
     description: 'Dynamic form rendering',
   },
+  {
+    pathname: '/conform-v2pre_dynamic',
+    title: 'Conform v2 - Dynamic',
+    description: 'Dynamic form rendering',
+  },
 ]
