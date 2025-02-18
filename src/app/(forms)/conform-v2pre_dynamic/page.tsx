@@ -72,7 +72,7 @@ export default function TestPage() {
       {optionValue === 'on' && (
         <div className="grid gap-1">
           <Label htmlFor={memo.id}>Memo</Label>
-          <Input placeholder="memo" {...memo.props} key={memo.key} />
+          <Input placeholder="memo" {...memo.props} />
           {memo.errors && (
             <p id={memo.errorId} className="text-sm text-red-500">
               {memo.errors}
